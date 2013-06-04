@@ -20,7 +20,7 @@
     "target-dir": "Elcweb/KeyValueStoreBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "develop-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }
