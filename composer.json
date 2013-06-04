@@ -1,0 +1,26 @@
+{
+    "name": "elcweb/keyvaluestore-bundle",
+    "type": "symfony-bundle",
+    "description": "Allows you to easily access and set key-value",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Etienne Lachance",
+            "email": "et@etiennelachance.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/framework-bundle": ">=2.1,<3.0-dev"
+    },
+    "autoload": {
+        "psr-0": { "Elcweb\\KeyValueStoreBundle": "" }
+    },
+    "minimum-stability": "dev",
+    "target-dir": "Elcweb/KeyValueStoreBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "develop"
+        }
+    }
+}
