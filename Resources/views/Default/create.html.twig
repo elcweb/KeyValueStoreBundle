@@ -1,0 +1,20 @@
+{% extends '::layout.html.twig' %}
+
+{% block content %}
+    <div class="span11">
+        <ul class="breadcrumb">
+            <li>Settings<span class="divider">/</span></li>
+            <li>
+                <a href="{{ path('elcweb_keyvaluestore_default_index') }}">Key Value</a>
+                <span class="divider">/</span></li>
+            <li class="active">{{ actionName }}</li>
+        </ul>
+
+        <form method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form) }}
+
+            <input type="submit" class="btn btn-primary" />
+        </form>
+        <a class="btn" href="{{ path('elcweb_keyvaluestore_default_index') }}">Cancel</a>
+    </div>
+{% endblock %}
