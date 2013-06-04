@@ -1,6 +1,6 @@
 <?php
 
-namespace Elcweb\Bundle\KeyValueStoreBundle;
+namespace Elcweb\KeyValueStoreBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

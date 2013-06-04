@@ -1,9 +1,9 @@
 <?php
 
-namespace Elcweb\Bundle\KeyValueStoreBundle\Controller;
+namespace Elcweb\KeyValueStoreBundle\Controller;
 
-use Elcweb\Bundle\KeyValueStoreBundle\Entity\KeyValue;
-use Elcweb\Bundle\KeyValueStoreBundle\Form\KeyValueType;
+use Elcweb\KeyValueStoreBundle\Entity\KeyValue;
+use Elcweb\KeyValueStoreBundle\Form\KeyValueType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Elcweb\Bundle\KeyValueStoreBundle\Form;
+namespace Elcweb\KeyValueStoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,7 +20,7 @@ class KeyValueType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Elcweb\Bundle\KeyValueStoreBundle\Entity\KeyValue'
+            'data_class' => 'Elcweb\KeyValueStoreBundle\Entity\KeyValue'
         ));
     }
 

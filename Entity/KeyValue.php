@@ -1,6 +1,6 @@
 <?php
 
-namespace Elcweb\Bundle\KeyValueStoreBundle\Entity;
+namespace Elcweb\KeyValueStoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

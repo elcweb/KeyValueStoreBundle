@@ -1,6 +1,6 @@
 <?php
 
-namespace Elcweb\Bundle\KeyValueStoreBundle\DependencyInjection;
+namespace Elcweb\KeyValueStoreBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;

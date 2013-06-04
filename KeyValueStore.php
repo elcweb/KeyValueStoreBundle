@@ -1,9 +1,9 @@
 <?php
 
-namespace Elcweb\Bundle\KeyValueStoreBundle;
+namespace Elcweb\KeyValueStoreBundle;
 
 use Doctrine\ORM\EntityManager;
-use Elcweb\Bundle\KeyValueStoreBundle\Entity\KeyValue;
+use Elcweb\KeyValueStoreBundle\Entity\KeyValue;
 
 class KeyValueStore
 {

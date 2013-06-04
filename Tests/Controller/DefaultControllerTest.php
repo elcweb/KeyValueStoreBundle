@@ -1,6 +1,6 @@
 <?php
 
-namespace Elcweb\Bundle\KeyValueStoreBundle\Tests\Controller;
+namespace Elcweb\KeyValueStoreBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
