@@ -25,7 +25,7 @@ class KeyValueStore
         return $value->getValue();
     }
 
-    public function set($key, $value)
+    public function set($key, $value, $description = "")
     {
         $keyvalue = $this->em->getRepository('ElcwebKeyValueStoreBundle:KeyValue')->findOneByKey($key);
 
@@ -35,6 +35,7 @@ class KeyValueStore
         }
 
         $keyvalue->setValue($value);
+        $keyvalue->setDescription($description);
 
         $this->em->persist($keyvalue);
         $this->em->flush();
