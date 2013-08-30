@@ -48,7 +48,7 @@ $ks = $this->get('elcweb.keyvaluestore');
 $value = $ks->get('KeyName');
 ```
 
-### Get all values starting with a patern
+### Get all values starting with a pattern
 ``` php
 $ks = $this->get('elcweb.keyvaluestore');
 $values = $ks->getAll('KeyName');
