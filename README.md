@@ -40,6 +40,28 @@ public function registerBundles()
 }
 ```
 
+Usage
+-----
+### Get a value
+``` php
+$ks = $this->get('elcweb.keyvaluestore');
+$value = $ks->get('KeyName');
+```
+
+### Get all values starting with a patern
+``` php
+$ks = $this->get('elcweb.keyvaluestore');
+$values = $ks->getAll('KeyName');
+
+// If you have a keys called foo.bar and foo.foo this will return an array with key bar and foo
+```
+
+### Set a value
+``` php
+$ks = $this->get('elcweb.keyvaluestore');
+$ks->set('key', 'value', 'optional description');
+```
+
 License
 -------
 
