@@ -38,24 +38,9 @@ class DefaultController extends Controller
      */
     public function createAction(Request $request)
     {
-        $keyvalue = new KeyValue();
-        $form     = $this->createForm(new KeyValueType(), $keyvalue);
+        $keyValue = new KeyValue();
 
-        if ($request->isMethod('POST')) {
-            $form->handleRequest($request);
-
-            if ($form->isValid()) {
-
-                $dispatcher = $this->container->get('event_dispatcher');
-
-                $dispatcher->dispatch('elcweb.keyvalue.created', new GenericEvent('', array('keyValue' => $keyvalue)));
-
-
-                $this->get('session')->getFlashBag()->add('success', 'Saved.');
-
-                return $this->redirect($this->generateUrl('elcweb_keyvaluestore_default_index'));
-            }
-        }
+        $form = $this->processForm($request, $keyValue, 'created');
 
         return array('form' => $form->createView(), 'actionName' => 'Create');
     }
@@ -66,26 +51,29 @@ class DefaultController extends Controller
      */
     public function editAction(Request $request, KeyValue $keyValue)
     {
+        $form = $this->processForm($request, $keyValue, 'updated');
 
+        return array('form' => $form->createView(), 'actionName' => 'Edit');
+    }
+
+    protected function processForm($request, $keyValue, $action = 'updated')
+    {
         $form = $this->createForm(new KeyValueType(), $keyValue);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-
                 $keyValue = $form->getData();
 
                 $dispatcher = $this->container->get('event_dispatcher');
-                $dispatcher->dispatch('elcweb.keyvalue.updated', new GenericEvent('', array('keyValue' => $keyValue)));
+                $dispatcher->dispatch('elcweb.keyvalue.'.$action, new GenericEvent('', array('keyValue' => $keyValue)));
 
                 $this->get('session')->getFlashBag()->add('success', 'Saved.');
 
                 return $this->redirect($this->generateUrl('elcweb_keyvaluestore_default_index'));
             }
         }
-
-        return array('form' => $form->createView(), 'actionName' => 'Edit');
     }
 
     /**
