@@ -6,11 +6,19 @@
 
     <parameters>
         <parameter key="elcweb.keyvaluestore.class">Elcweb\KeyValueStoreBundle\KeyValueStore</parameter>
+        <parameter key="elcweb.listener.keyvalue.class">Elcweb\KeyValueStoreBundle\EventListener\KeyValueCreateListener</parameter>
+
     </parameters>
 
     <services>
         <service id="elcweb.keyvaluestore" class="%elcweb.keyvaluestore.class%">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
         </service>
+
+        <service id="elcweb.listener.keyvalue" class="%elcweb.listener.keyvalue.class%">
+            <tag name="kernel.event_listener" event="elcweb.keyvalue.created" method="onEvent"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+
     </services>
 </container>

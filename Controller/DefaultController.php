@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @Route("/admin/keyvalue")
@@ -37,17 +38,18 @@ class DefaultController extends Controller
      */
     public function createAction(Request $request)
     {
-        $model = new KeyValue();
-        $form  = $this->createForm(new KeyValueType(), $model);
+        $keyvalue = new KeyValue();
+        $form     = $this->createForm(new KeyValueType(), $keyvalue);
 
         if ($request->isMethod('POST')) {
-            $form->bind($request);
+            $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
 
-                $em->persist($model);
-                $em->flush();
+                $dispatcher = $this->container->get('event_dispatcher');
+
+                $dispatcher->dispatch('elcweb.keyvalue.created', new GenericEvent('', array('keyValue' => $keyvalue)));
+
 
                 $this->get('session')->getFlashBag()->add('success', 'Saved.');
 
@@ -62,23 +64,20 @@ class DefaultController extends Controller
      * @Route("/edit/{key}")
      * @Template("ElcwebKeyValueStoreBundle:Default:create.html.twig")
      */
-    public function editAction($key, Request $request)
+    public function editAction(Request $request, KeyValue $keyValue)
     {
-        $em    = $this->getDoctrine()->getManager();
-        $model = $em->getRepository('ElcwebKeyValueStoreBundle:KeyValue')->findOneBy(array('key' => $key));
 
-        if (!$model) {
-            throw $this->createNotFoundException('No value found for key ' . $key);
-        }
-
-        $form = $this->createForm(new KeyValueType(), $model);
+        $form = $this->createForm(new KeyValueType(), $keyValue);
 
         if ($request->isMethod('POST')) {
-            $form->bind($request);
+            $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $em->persist($model);
-                $em->flush();
+
+                $keyValue = $form->getData();
+
+                $dispatcher = $this->container->get('event_dispatcher');
+                $dispatcher->dispatch('elcweb.keyvalue.updated', new GenericEvent('', array('keyValue' => $keyValue)));
 
                 $this->get('session')->getFlashBag()->add('success', 'Saved.');
 
