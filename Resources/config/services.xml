@@ -6,7 +6,7 @@
 
     <parameters>
         <parameter key="elcweb.keyvaluestore.class">Elcweb\KeyValueStoreBundle\KeyValueStore</parameter>
-        <parameter key="elcweb.listener.keyvalue.class">Elcweb\KeyValueStoreBundle\EventListener\KeyValueCreateListener</parameter>
+        <parameter key="elcweb.listener.keyvalue.class">Elcweb\KeyValueStoreBundle\EventListener\KeyValueListener</parameter>
 
     </parameters>
 

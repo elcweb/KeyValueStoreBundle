@@ -6,7 +6,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Doctrine\ORM\EntityManager;
 use Elcweb\KeyValueStoreBundle\KeyValueStore;
 
-class KeyValueCreateListener
+class KeyValueListener
 {
 
     public function __construct(KeyValueStore $kv)
