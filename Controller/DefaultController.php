@@ -40,7 +40,12 @@ class DefaultController extends Controller
     {
         $keyValue = new KeyValue();
 
-        $form = $this->processForm($request, $keyValue, 'created');
+        $form   = $this->createForm(new KeyValueType(), $keyValue);
+        $result = $this->processForm($form, $request, $keyValue, 'created');
+
+        if ($result) {
+            return $this->redirect($this->generateUrl('elcweb_keyvaluestore_default_index'));
+        }
 
         return array('form' => $form->createView(), 'actionName' => 'Create');
     }
@@ -51,15 +56,18 @@ class DefaultController extends Controller
      */
     public function editAction(Request $request, KeyValue $keyValue)
     {
-        $form = $this->processForm($request, $keyValue, 'updated');
+        $form   = $this->createForm(new KeyValueType(), $keyValue);
+        $result = $this->processForm($form, $request, $keyValue, 'updated');
+
+        if ($result) {
+            return $this->redirect($this->generateUrl('elcweb_keyvaluestore_default_index'));
+        }
 
         return array('form' => $form->createView(), 'actionName' => 'Edit');
     }
 
-    protected function processForm($request, $keyValue, $action = 'updated')
+    private function processForm($form, $request, $keyValue, $action = 'updated')
     {
-        $form = $this->createForm(new KeyValueType(), $keyValue);
-
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
@@ -71,9 +79,11 @@ class DefaultController extends Controller
 
                 $this->get('session')->getFlashBag()->add('success', 'Saved.');
 
-                return $this->redirect($this->generateUrl('elcweb_keyvaluestore_default_index'));
+                return true;
             }
         }
+
+        return false;
     }
 
     /**
