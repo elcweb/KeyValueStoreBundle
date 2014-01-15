@@ -17,7 +17,8 @@
 
         <service id="elcweb.listener.keyvalue" class="%elcweb.listener.keyvalue.class%">
             <tag name="kernel.event_listener" event="elcweb.keyvalue.created" method="onEvent"/>
-            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <tag name="kernel.event_listener" event="elcweb.keyvalue.updated" method="onEvent"/>
+            <argument type="service" id="elcweb.keyvaluestore"/>
         </service>
 
     </services>
