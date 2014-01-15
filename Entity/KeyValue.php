@@ -3,20 +3,26 @@
 namespace Elcweb\KeyValueStoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Elcweb\CommonBundle\Entity\BaseEntity;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * KeyValue
  *
  * @ORM\Table()
  * @ORM\Entity
+ *
+ * @Serializer\ExclusionPolicy("all")
  */
-class KeyValue
+class KeyValue extends BaseEntity
 {
     /**
      * @var string
      *
      * @ORM\Column(name="key_name", type="string")
      * @ORM\Id
+     *
+     * @Serializer\Expose
      */
     private $key;
 
@@ -24,6 +30,8 @@ class KeyValue
      * @var string
      *
      * @ORM\Column(type="text")
+     *
+     * @Serializer\Expose
      */
     private $value;
 
@@ -31,6 +39,7 @@ class KeyValue
      * @var string
      *
      * @ORM\Column(type="string", nullable=true)
+     * @Serializer\Expose
      */
     private $description;
 

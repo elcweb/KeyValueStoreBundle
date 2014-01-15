@@ -13,8 +13,7 @@ class KeyValueType extends AbstractType
         $builder
             ->add('key')
             ->add('value')
-            ->add('description')
-        ;
+            ->add('description');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

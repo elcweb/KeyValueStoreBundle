@@ -1,39 +1,43 @@
 {% extends '::layout.html.twig' %}
+
+{% block breadcrumb %}
+    <li class="active">Key Value Store</li>
+{% endblock %}
+
 {% block content %}
     {% spaceless %}
-        <div class="span11">
-            <ul class="breadcrumb">
-                <li class="active">KeyValue</li>
-            </ul>
 
-                <a class="btn" href="{{ path('elcweb_keyvaluestore_default_create') }}">Create New</a>
+        <a class="btn btn-primary" href="{{ path('elcweb_keyvaluestore_default_create') }}">Create New</a>
 
-            <table id="mytable" class="tablesorter table table-striped table-bordered table-condensed">
-                <thead>
+        <table id="mytable" class="tablesorter table table-striped table-bordered table-condensed">
+            <thead>
+            <tr>
+                <th>Key Name</th>
+                <th>Value</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
                 <tr>
-                    <th>Key Name</th>
-                    <th>Value</th>
-                    <th>Description</th>
-                    <th colspan="2">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for item in items %}
-                    <tr>
-                        <td>{{ item.key }}</td>
-                        <td>{{ item.value }}</td>
-                        <td>{{ item.description }}</td>
-                        <td>
-                            <a class="btn" title="Edit" href="{{ path('elcweb_keyvaluestore_default_edit', {'key': item.key}) }}">Edit</a>
+                    <td>{{ item.key }}</td>
+                    <td>{{ item.value }}</td>
+                    <td>{{ item.description }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-default" title="Edit" href="{{ path('elcweb_keyvaluestore_default_edit', {'key': item.key}) }}">
+                                Edit
+                            </a>
                             <a class="btn btn-danger disabled" title="Delete" href="{{ path('elcweb_keyvaluestore_default_delete', {'key': item.key}) }}" onclick="return confirm('Delete?');">
                                 Delete
                             </a>
-                        </td>
+                        </div>
+                    </td>
 
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     {% endspaceless %}
 {% endblock %}

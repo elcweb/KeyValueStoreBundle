@@ -55,7 +55,7 @@ class DefaultController extends Controller
             }
         }
 
-        return array('form' => $form->createView(), 'actionName' => 'Create' );
+        return array('form' => $form->createView(), 'actionName' => 'Create');
     }
 
     /**
@@ -86,7 +86,7 @@ class DefaultController extends Controller
             }
         }
 
-        return array('form' => $form->createView(), 'actionName' => 'Edit' );
+        return array('form' => $form->createView(), 'actionName' => 'Edit');
     }
 
     /**

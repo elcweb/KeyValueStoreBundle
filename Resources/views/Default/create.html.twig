@@ -1,20 +1,23 @@
 {% extends '::layout.html.twig' %}
 
+{% block breadcrumb %}
+    <li>Settings</li>
+    <li>
+        <a href="{{ path('elcweb_keyvaluestore_default_index') }}">Key Value Store</a>
+    </li>
+    <li class="active">{{ actionName }}</li>
+{% endblock %}
+
 {% block content %}
-    <div class="span11">
-        <ul class="breadcrumb">
-            <li>Settings<span class="divider">/</span></li>
-            <li>
-                <a href="{{ path('elcweb_keyvaluestore_default_index') }}">Key Value</a>
-                <span class="divider">/</span></li>
-            <li class="active">{{ actionName }}</li>
-        </ul>
 
-        <form method="post" {{ form_enctype(form) }}>
-            {{ form_widget(form) }}
+    <div class="col-md-2">
+        {{ form_start(form, {'method': 'post'}) }}
+        {{ form_widget(form) }}
 
+        <span class="btn-group">
             <input type="submit" class="btn btn-primary" />
-        </form>
-        <a class="btn" href="{{ path('elcweb_keyvaluestore_default_index') }}">Cancel</a>
+            <a class="btn btn-default" href="{{ path('elcweb_keyvaluestore_default_index') }}">Cancel</a>
+        </span>
+        {{ form_end(form) }}
     </div>
 {% endblock %}
