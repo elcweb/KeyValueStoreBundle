@@ -5,6 +5,7 @@ namespace Elcweb\KeyValueStoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Elcweb\CommonBundle\Entity\BaseEntity;
 use JMS\Serializer\Annotation as Serializer;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * KeyValue
@@ -13,6 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @ORM\Entity
  *
  * @Serializer\ExclusionPolicy("all")
+ * @Gedmo\Loggable
  */
 class KeyValue extends BaseEntity
 {
@@ -23,6 +25,7 @@ class KeyValue extends BaseEntity
      * @ORM\Id
      *
      * @Serializer\Expose
+     * @Gedmo\Versioned
      */
     private $key;
 
@@ -32,6 +35,7 @@ class KeyValue extends BaseEntity
      * @ORM\Column(type="text")
      *
      * @Serializer\Expose
+     * @Gedmo\Versioned
      */
     private $value;
 
@@ -40,6 +44,7 @@ class KeyValue extends BaseEntity
      *
      * @ORM\Column(type="string", nullable=true)
      * @Serializer\Expose
+     * @Gedmo\Versioned
      */
     private $description;
 
