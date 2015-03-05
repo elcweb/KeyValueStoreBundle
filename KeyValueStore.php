@@ -7,8 +7,16 @@ use Elcweb\KeyValueStoreBundle\Entity\KeyValue;
 
 class KeyValueStore
 {
+    /**
+     *
+     * @var EntityManager 
+     */
     protected $em;
 
+    /**
+     * 
+     * @param EntityManager $em
+     */
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
@@ -25,7 +33,7 @@ class KeyValueStore
         $value = $this->em->getRepository('ElcwebKeyValueStoreBundle:KeyValue')->findOneByKey($key);
 
         if (!$value) {
-            return false;
+            return null;
         }
 
         return $value->getValue();
