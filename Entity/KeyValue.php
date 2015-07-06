@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Elcweb\CommonBundle\Entity\BaseEntity;
 use JMS\Serializer\Annotation as Serializer;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * KeyValue
@@ -21,6 +22,10 @@ class KeyValue extends BaseEntity
     /**
      * @var string
      *
+     * @Assert\Length(
+     *      min = 2,
+     *      minMessage = "The key name should be at least 2 characters long"
+     * )
      * @ORM\Column(name="key_name", type="string")
      * @ORM\Id
      *
