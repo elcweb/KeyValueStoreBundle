@@ -40,6 +40,17 @@ public function registerBundles()
 }
 ```
 
+### Step 3: Doctrine Migration (optional)
+
+If you are upgrading from version 1.x you will need to do a migration.
+We recommend using [DoctrineMigration](https://github.com/doctrine/DoctrineMigrationsBundle)
+
+An migration example exist in
+
+    DoctrineMigrations/Version20150715164320.php
+
+Make sure that your parameter %secret% is 32 characters long.
+
 Usage
 -----
 ### Get a value
