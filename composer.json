@@ -16,7 +16,7 @@
     },
     "suggest": {
         "doctrine/doctrine-migrations-bundle": "*"
-    }
+    },
     "autoload": {
         "psr-0": { "Elcweb\\KeyValueStoreBundle": "" }
     },
