@@ -12,7 +12,7 @@ Installation
 ```js
 {
     "require": {
-        "elcweb/keyvaluestore-bundle": "dev-master"
+        "elcweb/keyvaluestore-bundle": "~2.0"
     }
 }
 ```
