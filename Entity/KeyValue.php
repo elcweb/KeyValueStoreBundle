@@ -3,6 +3,7 @@
 namespace Elcweb\KeyValueStoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DoctrineEncrypt\Configuration\Encrypted;
 use Elcweb\CommonBundle\Entity\BaseEntity;
 use JMS\Serializer\Annotation as Serializer;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -39,6 +40,7 @@ class KeyValue extends BaseEntity
      *
      * @ORM\Column(type="text")
      *
+     * @Encrypted
      * @Serializer\Expose
      * @Gedmo\Versioned
      */
