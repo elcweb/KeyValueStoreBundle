@@ -7,3 +7,4 @@ before_nstall:
   - composer self-update
 install: composer install --dev
 script: bin/phpunit
+sudo: false
