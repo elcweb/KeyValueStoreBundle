@@ -11,14 +11,28 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "symfony/framework-bundle": ">=2.1,<3.0-dev",
-        "51systems/doctrine-encrypt": "~4.0"
+        "symfony/symfony": ">=2.3,<3.0-dev",
+        "doctrine/dbal": "<2.5",
+        "doctrine/orm": "~2.2,>=2.2.3,<2.5",
+        "doctrine/doctrine-bundle": "~1.4",
+        "51systems/doctrine-encrypt": "~4.0",
+        "jms/serializer-bundle": "dev-master",
+        "stof/doctrine-extensions-bundle": "dev-master",
+        "elcweb/common-bundle": "dev-master",
+        "elcweb/doctrine-encrypt-bundle": "0.1.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.8.*",
+        "symfony/finder": ">=2.7,<3.0-dev"
     },
     "suggest": {
         "doctrine/doctrine-migrations-bundle": "*"
     },
     "autoload": {
         "psr-0": { "Elcweb\\KeyValueStoreBundle": "" }
+    },
+    "config": {
+        "bin-dir": "bin"
     },
     "minimum-stability": "dev",
     "target-dir": "Elcweb/KeyValueStoreBundle"

@@ -1,0 +1,32 @@
+framework:
+    secret: 12345678901234567890123456789012
+    session:
+        storage_id: session.storage.mock_file
+
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                driver:   pdo_sqlite
+                path:     %kernel.cache_dir%/test.db
+#                memory: true
+    orm:
+        auto_generate_proxy_classes: true
+        auto_mapping: true
+        mappings:
+            gedmo_loggable:
+                type: annotation
+                prefix: Gedmo\Loggable\Entity
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
+                alias: GedmoLoggable # this one is optional and will default to the name set for the mapping
+                is_bundle: false
+
+stof_doctrine_extensions:
+    orm:
+        default:
+            timestampable: true
+            loggable: true
+
+elcweb_doctrine_encrypt:
+    secret_key: 12345678901234567890123456789012
