@@ -3,7 +3,7 @@ KeyValueStoreBundle
 
 [![Latest Stable Version](https://poser.pugx.org/elcweb/keyvaluestore-bundle/v/stable.png)](https://packagist.org/packages/elcweb/keyvaluestore-bundle)
 [![Total Downloads](https://poser.pugx.org/elcweb/keyvaluestore-bundle/downloads.png)](https://packagist.org/packages/elcweb/keyvaluestore-bundle)
-[![Travis](https://travis-ci.org/elcweb/KeyValueStoreBundle.svg)](https://travis-ci.org/elcweb/KeyValueStoreBundle.svg)
+[![Travis](https://travis-ci.org/elcweb/KeyValueStoreBundle)](https://travis-ci.org/elcweb/KeyValueStoreBundle.svg)
 
 Installation
 ------------
