@@ -89,10 +89,13 @@ class DefaultController extends Controller
     /**
      * @Route("/delete/{key}")
      */
-    public function deleteAction($key)
+    public function deleteAction(KeyValue $keyValue)
     {
-        // TODO: soft delete
-        $this->get('session')->getFlashBag()->add('error', "Function not implemented. Can't delete {$key}");
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($keyValue);
+        $entityManager->flush();
+
+        $this->get('session')->getFlashBag()->add('success', "{$keyValue->getKey()} Removed");
 
         return $this->redirect($this->generateUrl('elcweb_keyvaluestore_default_index'));
     }
