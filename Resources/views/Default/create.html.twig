@@ -1,5 +1,5 @@
 {% extends '::layout.html.twig' %}
-
+{% block ngApp %}{% endblock %}
 {% block breadcrumb %}
     <li>Settings</li>
     <li>
@@ -9,15 +9,7 @@
 {% endblock %}
 
 {% block content %}
-
     <div class="col-md-2">
-        {{ form_start(form, {'method': 'post'}) }}
-        {{ form_widget(form) }}
-
-        <span class="btn-group">
-            <input type="submit" class="btn btn-primary" />
-            <a class="btn btn-default" href="{{ path('elcweb_keyvaluestore_default_index') }}">Cancel</a>
-        </span>
-        {{ form_end(form) }}
+        {{ form(form) }}
     </div>
 {% endblock %}

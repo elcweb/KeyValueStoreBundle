@@ -7,10 +7,14 @@ use Elcweb\KeyValueStoreBundle\Form\KeyValueType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
+ * Class DefaultController
+ * @package Elcweb\KeyValueStoreBundle\Controller
+ *
  * @Route("/admin/keyvalue")
  */
 class DefaultController extends Controller
@@ -18,6 +22,8 @@ class DefaultController extends Controller
     /**
      * @Route("/")
      * @Template()
+     *
+     * @return array
      */
     public function indexAction()
     {
@@ -29,44 +35,67 @@ class DefaultController extends Controller
 
         $items = $em->getRepository('ElcwebKeyValueStoreBundle:KeyValue')->findAll();
 
-        return array('items' => $items);
+        return ['items' => $items];
     }
 
     /**
      * @Route("/create")
      * @Template()
+     *
+     * @param Request $request
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function createAction(Request $request)
     {
         $keyValue = new KeyValue();
 
-        $form   = $this->createForm(new KeyValueType(), $keyValue);
-        $result = $this->processForm($form, $request, $keyValue, 'created');
+        $form = $this->createForm(
+            KeyValueType::class,
+            $keyValue,
+            ['action' => $this->generateUrl('elcweb_keyvaluestore_default_create')]
+        );
+        $result = $this->processForm($form, $request);
 
         if ($result) {
-            return $this->redirect($this->generateUrl('elcweb_keyvaluestore_default_index'));
+            return $this->redirectToRoute('elcweb_keyvaluestore_default_index');
         }
 
-        return array('form' => $form->createView(), 'actionName' => 'Create');
+        return ['form' => $form->createView(), 'actionName' => 'Create'];
     }
 
     /**
      * @Route("/edit/{key}")
      * @Template("ElcwebKeyValueStoreBundle:Default:create.html.twig")
+     *
+     * @param Request  $request
+     * @param KeyValue $keyValue
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function editAction(Request $request, KeyValue $keyValue)
     {
-        $form   = $this->createForm(new KeyValueType(), $keyValue);
-        $result = $this->processForm($form, $request, $keyValue, 'updated');
+        $form = $this->createForm(
+            KeyValueType::class,
+            $keyValue,
+            ['action' => $this->generateUrl('elcweb_keyvaluestore_default_edit', ['key' => $keyValue->getKey()])]
+        );
+        $result = $this->processForm($form, $request);
 
         if ($result) {
-            return $this->redirect($this->generateUrl('elcweb_keyvaluestore_default_index'));
+            return $this->redirectToRoute('elcweb_keyvaluestore_default_index');
         }
 
-        return array('form' => $form->createView(), 'actionName' => 'Edit');
+        return ['form' => $form->createView(), 'actionName' => 'Edit'];
     }
 
-    private function processForm($form, $request, $keyValue, $action = 'updated')
+    /**
+     * @param Form    $form
+     * @param Request $request
+     *
+     * @return bool
+     */
+    private function processForm(Form $form, Request $request)
     {
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -74,10 +103,11 @@ class DefaultController extends Controller
             if ($form->isValid()) {
                 $keyValue = $form->getData();
 
-                $dispatcher = $this->container->get('event_dispatcher');
-                $dispatcher->dispatch('elcweb.keyvalue.'.$action, new GenericEvent('', array('keyValue' => $keyValue)));
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($keyValue);
+                $entityManager->flush();
 
-                $this->get('session')->getFlashBag()->add('success', 'Saved.');
+                $this->addFlash('success', 'Saved.');
 
                 return true;
             }
@@ -88,13 +118,19 @@ class DefaultController extends Controller
 
     /**
      * @Route("/delete/{key}")
+     *
+     * @param KeyValue $key
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction($key)
+    public function deleteAction(KeyValue $key)
     {
-        // TODO: soft delete
-        $this->get('session')->getFlashBag()->add('error', "Function not implemented. Can't delete {$key}");
+        $this->addFlash('success', "Key {$key->getKey()} was removed");
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($key);
+        $entityManager->flush();
 
-        return $this->redirect($this->generateUrl('elcweb_keyvaluestore_default_index'));
+        return $this->redirectToRoute('elcweb_keyvaluestore_default_index');
     }
 
 }

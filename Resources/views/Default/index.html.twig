@@ -29,12 +29,11 @@
                             <a class="btn btn-default" title="Edit" href="{{ path('elcweb_keyvaluestore_default_edit', {'key': item.key}) }}">
                                 Edit
                             </a>
-                            <a class="btn btn-danger disabled" title="Delete" href="{{ path('elcweb_keyvaluestore_default_delete', {'key': item.key}) }}" onclick="return confirm('Delete?');">
+                            <a class="btn btn-danger" title="Delete" href="{{ path('elcweb_keyvaluestore_default_delete', {'key': item.key}) }}" onclick="return confirm('Are you sure?');">
                                 Delete
                             </a>
                         </div>
                     </td>
-
                 </tr>
             {% endfor %}
             </tbody>
